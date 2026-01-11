@@ -1,0 +1,416 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description"
+        content="Appliance Analytics Platform - Interactive Business Intelligence Dashboard for Washing Machine Market Analysis">
+    <title>Appliance Analytics Platform | Washing Machine Market Intelligence</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels@2.2.0"></script>
+</head>
+
+<body>
+    <!-- Animated Background -->
+    <div class="bg-gradient"></div>
+    <div class="floating-orbs">
+        <div class="orb orb-1"></div>
+        <div class="orb orb-2"></div>
+        <div class="orb orb-3"></div>
+    </div>
+
+    <!-- Header -->
+    <header class="header">
+        <div class="header-content">
+            <div class="logo">
+                <div class="logo-icon">
+                    <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <circle cx="12" cy="12" r="10" stroke="currentColor" stroke-width="2" />
+                        <circle cx="12" cy="12" r="4" stroke="currentColor" stroke-width="2" />
+                        <path d="M12 2V6" stroke="currentColor" stroke-width="2" stroke-linecap="round" />
+                        <path d="M12 18V22" stroke="currentColor" stroke-width="2" stroke-linecap="round" />
+                        <path d="M2 12H6" stroke="currentColor" stroke-width="2" stroke-linecap="round" />
+                        <path d="M18 12H22" stroke="currentColor" stroke-width="2" stroke-linecap="round" />
+                    </svg>
+                </div>
+                <span class="logo-text">Appliance Analytics</span>
+            </div>
+            <nav class="nav">
+                <a href="#overview" class="nav-link active">Overview</a>
+                <a href="#analytics" class="nav-link">Analytics</a>
+                <a href="#insights" class="nav-link">Insights</a>
+            </nav>
+            <div class="header-actions">
+                <div class="search-container">
+                    <input type="text" id="globalSearch" placeholder="Search models..." class="search-input">
+                    <svg class="search-icon" viewBox="0 0 24 24" fill="none">
+                        <circle cx="11" cy="11" r="8" stroke="currentColor" stroke-width="2" />
+                        <path d="M21 21L16.65 16.65" stroke="currentColor" stroke-width="2" stroke-linecap="round" />
+                    </svg>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="main-container">
+        <!-- Sidebar Filters -->
+        <aside class="sidebar" id="sidebar">
+            <div class="sidebar-header">
+                <h3>Filters</h3>
+                <button class="btn-reset" onclick="resetFilters()">Reset All</button>
+            </div>
+
+            <!-- Quick Filter Presets -->
+            <div class="filter-section">
+                <div class="filter-title">⚡ Quick Presets</div>
+                <div class="preset-grid">
+                    <button class="preset-btn" onclick="applyPreset('best-value')">
+                        <span class="preset-icon">💰</span>
+                        <span class="preset-label">Best Value</span>
+                    </button>
+                    <button class="preset-btn" onclick="applyPreset('premium')">
+                        <span class="preset-icon">✨</span>
+                        <span class="preset-label">Premium</span>
+                    </button>
+                    <button class="preset-btn" onclick="applyPreset('budget')">
+                        <span class="preset-icon">💵</span>
+                        <span class="preset-label">Budget</span>
+                    </button>
+                    <button class="preset-btn" onclick="applyPreset('high-capacity')">
+                        <span class="preset-icon">📦</span>
+                        <span class="preset-label">Large Capacity</span>
+                    </button>
+                    <button class="preset-btn" onclick="applyPreset('high-speed')">
+                        <span class="preset-icon">⚡</span>
+                        <span class="preset-label">High Speed</span>
+                    </button>
+                    <button class="preset-btn" onclick="applyPreset('top-rated')">
+                        <span class="preset-icon">⭐</span>
+                        <span class="preset-label">Top Rated</span>
+                    </button>
+                </div>
+            </div>
+
+            <div class="filter-section">
+                <h4 class="filter-title">Brand</h4>
+                <div class="filter-options" id="brandFilters">
+                    <!-- Dynamically populated -->
+                </div>
+            </div>
+
+            <div class="filter-section">
+                <h4 class="filter-title">Price Range (USD)</h4>
+                <div class="range-inputs">
+                    <input type="number" id="minPrice" placeholder="Min" class="range-input">
+                    <span class="range-separator">-</span>
+                    <input type="number" id="maxPrice" placeholder="Max" class="range-input">
+                </div>
+                <div class="range-slider-container">
+                    <input type="range" id="priceSlider" min="0" max="500" value="500" class="range-slider">
+                </div>
+            </div>
+
+            <div class="filter-section">
+                <h4 class="filter-title">Capacity (lb)</h4>
+                <div class="range-inputs">
+                    <input type="number" id="minCapacity" placeholder="Min" class="range-input" step="0.1">
+                    <span class="range-separator">-</span>
+                    <input type="number" id="maxCapacity" placeholder="Max" class="range-input" step="0.1">
+                </div>
+            </div>
+
+            <div class="filter-section">
+                <h4 class="filter-title">Function Type</h4>
+                <div class="filter-options" id="typeFilters">
+                    <!-- Dynamically populated -->
+                </div>
+            </div>
+
+            <div class="filter-section">
+                <h4 class="filter-title">Has Heater</h4>
+                <div class="toggle-container">
+                    <label class="toggle-option">
+                        <input type="radio" name="heater" value="all" checked>
+                        <span class="toggle-label">All</span>
+                    </label>
+                    <label class="toggle-option">
+                        <input type="radio" name="heater" value="Yes">
+                        <span class="toggle-label">Yes</span>
+                    </label>
+                    <label class="toggle-option">
+                        <input type="radio" name="heater" value="No">
+                        <span class="toggle-label">No</span>
+                    </label>
+                </div>
+            </div>
+
+            <button class="btn-apply" id="applyFilters">Apply Filters</button>
+        </aside>
+
+        <!-- Dashboard Content -->
+        <div class="dashboard">
+            <!-- Hero Section with KPIs -->
+            <section class="hero-section" id="overview">
+                <div class="hero-content">
+                    <h1 class="hero-title">Washing Machine Market Intelligence</h1>
+                    <p class="hero-subtitle">Comprehensive analytics dashboard for data-driven decision making</p>
+                </div>
+                <div class="kpi-grid">
+                    <div class="kpi-card">
+                        <div class="kpi-icon">
+                            <svg viewBox="0 0 24 24" fill="none">
+                                <path
+                                    d="M20 7H4C2.89543 7 2 7.89543 2 9V19C2 20.1046 2.89543 21 4 21H20C21.1046 21 22 20.1046 22 19V9C22 7.89543 21.1046 7 20 7Z"
+                                    stroke="currentColor" stroke-width="2" />
+                                <path d="M16 21V5C16 3.89543 15.1046 3 14 3H10C8.89543 3 8 3.89543 8 5V21"
+                                    stroke="currentColor" stroke-width="2" />
+                            </svg>
+                        </div>
+                        <div class="kpi-content">
+                            <span class="kpi-value" id="totalModels">--</span>
+                            <span class="kpi-label">Total Models</span>
+                        </div>
+                    </div>
+                    <div class="kpi-card">
+                        <div class="kpi-icon">
+                            <svg viewBox="0 0 24 24" fill="none">
+                                <path
+                                    d="M12 2L15.09 8.26L22 9.27L17 14.14L18.18 21.02L12 17.77L5.82 21.02L7 14.14L2 9.27L8.91 8.26L12 2Z"
+                                    stroke="currentColor" stroke-width="2" stroke-linejoin="round" />
+                            </svg>
+                        </div>
+                        <div class="kpi-content">
+                            <span class="kpi-value" id="avgRating">--</span>
+                            <span class="kpi-label">Avg Rating</span>
+                        </div>
+                    </div>
+                    <div class="kpi-card">
+                        <div class="kpi-icon">
+                            <svg viewBox="0 0 24 24" fill="none">
+                                <path d="M12 2V22" stroke="currentColor" stroke-width="2" stroke-linecap="round" />
+                                <path
+                                    d="M17 5H9.5C8.57174 5 7.6815 5.36875 7.02513 6.02513C6.36875 6.6815 6 7.57174 6 8.5C6 9.42826 6.36875 10.3185 7.02513 10.9749C7.6815 11.6313 8.57174 12 9.5 12H14.5C15.4283 12 16.3185 12.3687 16.9749 13.0251C17.6313 13.6815 18 14.5717 18 15.5C18 16.4283 17.6313 17.3185 16.9749 17.9749C16.3185 18.6313 15.4283 19 14.5 19H6"
+                                    stroke="currentColor" stroke-width="2" stroke-linecap="round" />
+                            </svg>
+                        </div>
+                        <div class="kpi-content">
+                            <span class="kpi-value" id="avgPrice">--</span>
+                            <span class="kpi-label">Avg Price</span>
+                        </div>
+                    </div>
+                    <div class="kpi-card">
+                        <div class="kpi-icon">
+                            <svg viewBox="0 0 24 24" fill="none">
+                                <path
+                                    d="M9.5 19C13.0899 19 16 16.0899 16 12.5C16 8.91015 13.0899 6 9.5 6C5.91015 6 3 8.91015 3 12.5C3 16.0899 5.91015 19 9.5 19Z"
+                                    stroke="currentColor" stroke-width="2" />
+                                <path d="M21 21L15.8 15.8" stroke="currentColor" stroke-width="2"
+                                    stroke-linecap="round" />
+                                <path d="M12 3V6" stroke="currentColor" stroke-width="2" stroke-linecap="round" />
+                                <path d="M18.3 5.7L16.2 7.8" stroke="currentColor" stroke-width="2"
+                                    stroke-linecap="round" />
+                            </svg>
+                        </div>
+                        <div class="kpi-content">
+                            <span class="kpi-value" id="totalBrands">--</span>
+                            <span class="kpi-label">Brands</span>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Market Overview Charts -->
+            <section class="section" id="analytics">
+                <h2 class="section-title">
+                    <span class="section-icon">📊</span>
+                    Market Overview
+                </h2>
+                <div class="charts-grid">
+                    <!-- Price vs Rating Scatter -->
+                    <div class="chart-card chart-large">
+                        <div class="chart-header">
+                            <h3>Price vs Performance Analysis</h3>
+                            <div class="chart-controls">
+                                <select id="scatterYAxis" class="chart-select">
+                                    <option value="rating">Rating</option>
+                                    <option value="spin_rpm">Spin RPM</option>
+                                    <option value="capacity_lb">Capacity (lb)</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="chart-container">
+                            <canvas id="pricePerformanceChart"></canvas>
+                        </div>
+                        <div class="chart-insights" id="scatterInsights">
+                            <div class="insight-badge">
+                                <span class="insight-icon">💡</span>
+                                <span class="insight-text">Loading insights...</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Brand Market Share -->
+                    <div class="chart-card">
+                        <div class="chart-header">
+                            <h3>Brand Dominance</h3>
+                            <div class="chart-tabs">
+                                <button class="chart-tab active" data-chart="listings">Listings</button>
+                                <button class="chart-tab" data-chart="avgRating">Avg Rating</button>
+                            </div>
+                        </div>
+                        <div class="chart-container">
+                            <canvas id="brandDominanceChart"></canvas>
+                        </div>
+                    </div>
+
+                    <!-- Brand Distribution Pie -->
+                    <div class="chart-card">
+                        <div class="chart-header">
+                            <h3>Market Share Distribution</h3>
+                        </div>
+                        <div class="chart-container">
+                            <canvas id="marketShareChart"></canvas>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Technical Breakdown -->
+            <section class="section">
+                <h2 class="section-title">
+                    <span class="section-icon">⚙️</span>
+                    Technical Breakdown
+                </h2>
+                <div class="charts-grid">
+                    <!-- Capacity Distribution -->
+                    <div class="chart-card">
+                        <div class="chart-header">
+                            <h3>Capacity Distribution</h3>
+                        </div>
+                        <div class="chart-container">
+                            <canvas id="capacityDistChart"></canvas>
+                        </div>
+                    </div>
+
+                    <!-- Feature Correlation -->
+                    <div class="chart-card">
+                        <div class="chart-header">
+                            <h3>Feature Price Premium Analysis</h3>
+                        </div>
+                        <div class="chart-container">
+                            <canvas id="featureCorrelationChart"></canvas>
+                        </div>
+                    </div>
+
+                    <!-- Function Type Analysis -->
+                    <div class="chart-card">
+                        <div class="chart-header">
+                            <h3>Function Type Price Distribution</h3>
+                        </div>
+                        <div class="chart-container">
+                            <canvas id="functionTypeChart"></canvas>
+                        </div>
+                    </div>
+
+                    <!-- Spin RPM Analysis -->
+                    <div class="chart-card">
+                        <div class="chart-header">
+                            <h3>Spin Speed vs Price</h3>
+                        </div>
+                        <div class="chart-container">
+                            <canvas id="spinRpmChart"></canvas>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Data Table Section -->
+            <section class="section" id="insights">
+                <h2 class="section-title">
+                    <span class="section-icon">📋</span>
+                    Product Catalog
+                </h2>
+                <div class="table-container">
+                    <div class="table-actions">
+                        <div class="table-search">
+                            <input type="text" id="tableSearch" placeholder="Filter products..."
+                                class="table-search-input">
+                        </div>
+                        <div class="table-sort">
+                            <select id="sortBy" class="sort-select">
+                                <option value="rating-desc">Rating: High to Low</option>
+                                <option value="rating-asc">Rating: Low to High</option>
+                                <option value="price-asc">Price: Low to High</option>
+                                <option value="price-desc">Price: High to Low</option>
+                                <option value="capacity-desc">Capacity: High to Low</option>
+                                <option value="spin-desc">Spin RPM: High to Low</option>
+                            </select>
+                        </div>
+                        <button class="btn-export" onclick="exportToCSV()">
+                            <svg width="16" height="16" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
+                            </svg>
+                            Export CSV
+                        </button>
+                    </div>
+                    <div class="table-wrapper">
+                        <table class="data-table" id="productTable">
+                            <thead>
+                                <tr>
+                                    <th>Brand</th>
+                                    <th>Model</th>
+                                    <th>Price</th>
+                                    <th>Rating</th>
+                                    <th>Capacity</th>
+                                    <th>Spin RPM</th>
+                                    <th>Type</th>
+                                    <th>Heater</th>
+                                    <th>Listings</th>
+                                    <th>Actions</th>
+                                </tr>
+                            </thead>
+                            <tbody id="productTableBody">
+                                <!-- Dynamically populated -->
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Key Insights Section -->
+            <section class="section">
+                <h2 class="section-title">
+                    <span class="section-icon">🎯</span>
+                    Key Market Insights
+                </h2>
+                <div class="insights-grid" id="insightsGrid">
+                    <!-- Dynamically populated -->
+                </div>
+            </section>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-content">
+            <p>&copy; 2026 Appliance Analytics Platform. Data-driven insights for smarter decisions.</p>
+            <div class="footer-links">
+                <a href="#">Methodology</a>
+                <a href="#">Data Sources</a>
+                <a href="#">API</a>
+            </div>
+        </div>
+    </footer>
+
+    <script src="app.js"></script>
+</body>
+
+</html>

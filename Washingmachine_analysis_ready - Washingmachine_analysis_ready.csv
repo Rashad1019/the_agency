@@ -1,0 +1,34 @@
+brand,model_name,avg_price_usd,rating,capacity_lb,spin_rpm,function_type,has_heater,listings
+LG,P7020NGAZ,$144.46,4.5,15.4,1350,Fully Automatic Top Load,No,44
+SAMSUNG,WT60R2000LL/TL,$108.31,4.4,13.2,1300,Fully Automatic Top Load,No,44
+WHIRLPOOL,MAGIC CLEAN 60I GREY DAZZLE,$108.31,4.4,13.2,1400,Fully Automatic Top Load,No,31
+SAMSUNG,WT70M3000UU/TL,$132.41,4.4,15.4,1350,Fully Automatic Top Load,No,9
+WHIRLPOOL,MAGIC CLEAN 8.0 GREY DAZZLE (10YR) NH,$150.48,4.4,17.6,1400,Fully Automatic Top Load,No,10
+SAMSUNG,WA65T4262NS/TL,$204.70,4.4,14.3,700,Fully Automatic Top Load,No,37
+LG,T70SKSF1Z,$210.72,4.4,15.4,700,Fully Automatic Top Load,No,44
+SAMSUNG,WW60R20GLMA/TL,$276.99,4.4,13.2,1000,Fully Automatic Front Load,Yes,44
+LG,FHM1207SDM,$361.33,4.4,15.4,1200,Fully Automatic Front Load,Yes,44
+IFB,Senator Neo VXS 8012,$385.42,4.4,17.6,1200,Fully Automatic Front Load,Yes,44
+MARQ BY FLIPKART,MQSA60H5M,$81.81,4.3,13.2,1350,Fully Automatic Top Load,No,44
+REALME TECHLIFE,RMSA755NNNDG,$104.70,4.3,16.5,1400,Fully Automatic Top Load,No,44
+REALME TECHLIFE,RMSA855NNNDG,$120.36,4.3,18.7,1400,Fully Automatic Top Load,No,44
+HAIER,HWM65-FE,$156.51,4.3,14.3,800,Fully Automatic Top Load,No,44
+SAMSUNG,WA70A4002GS/TL,$190.24,4.3,15.4,680,Fully Automatic Top Load,No,44
+SAMSUNG,WA65T4262GG/TL,$192.65,4.3,14.3,700,Fully Automatic Top Load,No,42
+IFB,TL-R1WH 7.0KG AQUA,$210.72,4.3,15.4,720,Fully Automatic Top Load,No,7
+SAMSUNG,WA70BG4441YYTL,$216.75,4.3,15.4,700,Fully Automatic Top Load,No,15
+SAMSUNG,WA80BG4441BGTL,$240.84,4.3,17.6,700,Fully Automatic Top Load,No,44
+SAMSUNG,WA90BG4542BDTL,$302.29,4.3,19.8,700,Fully Automatic Top Load,No,44
+MARQ BY FLIPKART,MQSA70H5M,$86.63,4.2,15.4,1350,Fully Automatic Top Load,No,44
+REALME TECHLIFE,RMSA705NNNDW,$93.86,4.2,15.4,1400,Fully Automatic Top Load,No,32
+ONIDA,S70GR,$96.27,4.2,15.4,1300,Fully Automatic Top Load,No,44
+HAIER,HTW65-187BO,$107.83,4.2,14.3,1300,Fully Automatic Top Load,No,12
+ONIDA,T62CGN / CRYSTAL 62,$132.41,4.2,13.7,700,Fully Automatic Top Load,No,9
+REALME TECHLIFE,RMFA75A5G,$148.07,4.2,16.5,700,Fully Automatic Top Load,No,44
+HAIER,HTW85-186,$152.89,4.2,18.7,1300,Fully Automatic Top Load,No,2
+MIDEA,MA100W70/G-IN,$158.92,4.2,15.4,680,Fully Automatic Top Load,No,16
+WHIRLPOOL,MAGIC CLEAN 6.0 GENX GREY 5YMW,$164.94,4.2,13.2,740,Fully Automatic Top Load,No,14
+HAIER,HTW90-1159,$168.55,4.2,19.8,1300,Fully Automatic Top Load,No,12
+WHIRLPOOL,MAGIC CLEAN 7.0 GENX GREY 5YMW,$183.61,4.2,15.4,740,Fully Automatic Top Load,No,44
+IFB,DIVA AQUA VSS 6008,$264.94,4.2,13.2,800,Fully Automatic Front Load,Yes,44
+MIDEA,MF100W70/T-IN,$302.29,4,15.4,1200,Fully Automatic Front Load,Yes,16
